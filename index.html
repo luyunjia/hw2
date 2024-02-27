@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Population Data</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e6e6e6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4285f4;
+            color: #fff;
+        }
+
+        tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<table id="populationTable">
+    <thead>
+        <tr>
+            <th>Year</th>
+            <th>Population</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var apiUrl = "https://datausa.io/api/data?drilldowns=Nation&measures=Population";
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const populationData = data.data;
+                const tableBody = document.querySelector('#populationTable tbody');
+
+                populationData.forEach(entry => {
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).textContent = entry.Year;
+                    row.insertCell(1).textContent = entry.Population.toLocaleString();
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+</script>
+
+</body>
+</html>
+
+

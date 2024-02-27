@@ -1,0 +1,2 @@
+I changed the color and format of the list directly in the file, so that I can easily modify and directly refresh to see the effect. If necessary, I can modify it into a css format file.
+I also sent screenshots in the folder, one is the initial state of the page, and one is the screenshot of checking the api status after refreshing.
